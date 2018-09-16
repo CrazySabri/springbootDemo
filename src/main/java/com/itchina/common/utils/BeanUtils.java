@@ -1,23 +1,18 @@
 package com.itchina.common.utils;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import java.lang.reflect.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 扩展Apache Commons BeanUtils, 提供一些反射方面缺失功能的封装.
  */
 
 @SuppressWarnings("unchecked")
-public class BeanUtils extends org.apache.commons.beanutils.BeanUtils {
+public class BeanUtils extends org.springframework.beans.BeanUtils {
 
 	protected static final Log logger = LogFactory.getLog(BeanUtils.class);
 
@@ -209,9 +204,9 @@ public class BeanUtils extends org.apache.commons.beanutils.BeanUtils {
 	public static String getGetterName(Class type, String fieldName) {
 
 		if (type.getName().equals("boolean")) {
-			return "is" + org.apache.commons.lang.StringUtils.capitalize(fieldName);
+			return "is" + org.springframework.util.StringUtils.capitalize(fieldName);
 		} else {
-			return "get" + org.apache.commons.lang.StringUtils.capitalize(fieldName);
+			return "get" + org.springframework.util.StringUtils.capitalize(fieldName);
 		}
 	}
 
@@ -342,7 +337,7 @@ public class BeanUtils extends org.apache.commons.beanutils.BeanUtils {
 	 * @param obj DTO对象
 	 * @return 带属性名和值的字符串
 	 */
-	public static String beanToString(Object obj){
-		return ToStringBuilder.reflectionToString(obj);
-	}
+//	public static String beanToString(Object obj){
+//		return ToStringBuilder.reflectionToString(obj);
+//	}
 }

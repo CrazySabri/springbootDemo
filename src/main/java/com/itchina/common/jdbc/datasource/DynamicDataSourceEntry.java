@@ -34,9 +34,9 @@ public class DynamicDataSourceEntry {
     /** 
      * 还原指定切面的数据源 
      *  
-     * @param joinPoint 
+     * @param joinPoint
      */
-    public void restore(JoinPoint join) {  
+    public void restore(JoinPoint joinPoint) {
         local.set(DEFAULT_SOURCE);  
     }
     
@@ -52,8 +52,8 @@ public class DynamicDataSourceEntry {
      *  
      * @param dataSource 
      */  
-    public void set(String source) {  
-        local.set(source); 
+    public void set(String dataSource) {
+        local.set(dataSource);
     }
 
     /**

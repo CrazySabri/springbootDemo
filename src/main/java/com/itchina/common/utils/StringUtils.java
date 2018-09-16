@@ -12,8 +12,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
+import java.util.Base64;
+import java.util.Base64;
 
 /**
  * String工具类
@@ -192,7 +192,7 @@ public class StringUtils {
 	/**
 	 * hex string to bytes
 	 * 
-	 * @param bytes
+	 * @param input
 	 * @return
 	 */
 	public static byte[] hex2Bytes(String input) {
@@ -822,7 +822,7 @@ public class StringUtils {
 	 * 
 	 * @param str
 	 *            目标字符串，如果为null则返回null
-	 * @param searchStr
+	 * @param searchChar
 	 *            匹配字符串，如果为null则不匹配任何值
 	 * @param replaceStr
 	 *            替换字符串，如果为null则不替换任何字符串
@@ -1060,7 +1060,7 @@ public class StringUtils {
 	/**
 	 * 以regex字符为分割符将list拼接成字符串
 	 * 
-	 * @param list
+	 * @param strArr
 	 * @param regex
 	 * @return
 	 */
@@ -1077,7 +1077,7 @@ public class StringUtils {
 	/**
 	 * 数组转换成List
 	 * 
-	 * @param objArr
+	 * @param strArr
 	 * @return
 	 */
 	public static List<String> arrToList(String[] strArr) {
@@ -1142,7 +1142,7 @@ public class StringUtils {
             e.printStackTrace();  
         }  
         if (b != null) {  
-            s = new BASE64Encoder().encode(b);  
+            s = Base64.getEncoder().encodeToString(b);
         }  
         return s;  
     }  
@@ -1155,10 +1155,9 @@ public class StringUtils {
 	public static String decoderBase64(String s) {  
         byte[] b = null;  
         String result = null;  
-        if (s != null) {  
-            BASE64Decoder decoder = new BASE64Decoder();  
+        if (s != null) {
             try {  
-                b = decoder.decodeBuffer(s);  
+                b = Base64.getDecoder().decode(s);
                 result = new String(b, "utf-8");  
             } catch (Exception e) {  
                 e.printStackTrace();  
