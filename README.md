@@ -14,3 +14,5 @@
 #### 支持数据库（分布式集群/读写分离---MySQL/sqlServer/MongoDB）
 #### 基于服务注册/发现的单点登录
 #### 基于redis的单点登录
+#### 基于actuator的服务监控
+#### 支持swagger在线接口文档
