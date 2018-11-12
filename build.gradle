@@ -1,8 +1,19 @@
+group = 'com.itchina'
+version = '0.0.1-SNAPSHOT'
+
+
+apply plugin: 'java'
+
+
+sourceCompatibility = 1.8
+
 buildscript {
 	ext {
 		springBootVersion = '2.0.4.RELEASE'
 	}
 	repositories {
+		maven { url 'https://maven.aliyun.com/repository/central' }
+		jcenter()
 		mavenCentral()
 	}
 	dependencies {
@@ -10,34 +21,37 @@ buildscript {
 	}
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
+allprojects {
+	group 'com.itchina'
+	version '1.0-SNAPSHOT'
 
-group = 'com.itchina'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
+	ext {
+		springCloudVersion = 'Finchley.SR2'
+	}
+	repositories {
+		maven { url 'https://maven.aliyun.com/repository/central' }
+		jcenter()
+		mavenCentral()
+	}
 
-repositories {
-	mavenCentral()
 }
 
+//设定当前模块项目中的配置
+subprojects {
+	apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
 
-dependencies {
-	compile('org.springframework.boot:spring-boot-starter-actuator')
-	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
-	compile('org.springframework.boot:spring-boot-starter-jdbc')
-	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('org.springframework.boot:spring-boot-starter-aop')
-	compile('org.springframework.boot:spring-boot-starter-data-redis')
-	compile('org.springframework.cloud:spring-cloud-starter-netflix-ribbon')
-	compile('org.springframework.cloud:spring-cloud-starter-openfeign')
-	compile('org.springframework.cloud:spring-cloud-starter-zookeeper-config')
-	compile('org.springframework.cloud:spring-cloud-starter-zookeeper-discovery')
-	compile('commons-codec:commons-codec:1.4')
-	runtime('com.h2database:h2')
-	runtime('mysql:mysql-connector-java')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+	dependencies {
+		compile('org.springframework.boot:spring-boot-starter-actuator')
+		testCompile('org.springframework.boot:spring-boot-starter-test')
+	}
+
+	dependencyManagement {
+		imports {
+			//加上此配置后，如果需要引用springcloud的组件，就不需要再提供版本信息
+			mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+		}
+	}
 }

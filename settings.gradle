@@ -1,1 +1,5 @@
 rootProject.name = 'springbootDemo'
+include 'user-service'
+include 'shop-service'
+include 'eureka-server'
+
